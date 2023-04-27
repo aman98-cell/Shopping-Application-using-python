@@ -1,0 +1,107 @@
+#Code phase 1 (Executed for one time only, creating the user Database):
+#Execution for thr first time
+import openpyxl
+wb = openpyxl.Workbook()#excel
+wb.save("UserData.xlsx")
+
+
+#Creating the product Catalogue here using the function
+def productcatalogue():
+    Shoes = ['shoetype1','shoetype2','shoestype3','shoestype4']
+    Jackets = ['jacket1','jacket2','jacket3','jacket4']
+    Tshirts = ['TS1','TS2','TS3','TS4','TS5']
+    print("Huge variety in shoes we have: ")
+    for i in Shoes:
+        print(i)
+    print(".....")
+    print("Huge variety in Jackets we have: ")
+    for i in Jackets:
+        print(i)
+    print(".....")
+    print("Huge variety in TShirts we have: ")
+    for i in Tshirts:
+        print(i)
+
+
+#Payment Gateway using function
+def confirmationandpayment(Name):
+    print("Proceeding with Confirmation and Payment: ") 
+    PurchasedConf = input("Enter yes to place an Order: ")
+    if PurchasedConf.lower() == "yes":
+        Name[chr(71)+str(2)] = "Yes"
+        print("Calculating your Order here: ")
+        Payment = input("Enter your preffered payment gateway for proceeding from Cash on delivery, UPI and Debit Card: ")
+        if Payment.lower() == "cash on delivery":
+            print("Continuing...with order.......")
+        elif Payment.lower() == "upi":
+            UPIid = "luieffg@KAJB2"#input("Enter UPI ID here: ")
+        elif Payment.lower() == "debit card":
+             DebitCard = "123454321"#int(input("Enter Debit Card Number: "))
+             CVV = "234"#int(input("Enter CVV: "))
+        Name[chr(72)+str(2)] = Payment
+        wb.save("UserData.xlsx")
+        print("Placing your order.......")
+        print("Hold Tight......")
+        print("Thanks for placing an order here!, your order will get delivered in next 2 to 3 business days")
+    else:
+        print("Explore our wide variety of products here! ")
+
+#Asking for desired products from user
+def enterpname(Name):
+    import openpyxl
+    ProductList = []
+    i = 1
+    count = 2 #int(input("provide count of products: "))
+    while i <= count:
+        products = input('Please enter'+" "+str(i)+" "+'product: ')
+        print(products)
+        ProductList.append(products)
+        i = i + 1
+    print("your chosen products: "," ",ProductList)
+    for i in range(0,2):
+        Name[chr(70)+str(2)] = ProductList[i]
+    wb.save("UserData.xlsx")
+    #for i in range(1,7):
+        #Name[chr(70)+str(i)] = Details[i-1]
+
+#Main code
+    visit = input("Hello User, visiting first time ?, pls enter yes or no: ")
+if visit.lower() == "yes":
+    print("Please enter some details!")
+    Name = "Dum2y"#input("Please enter your Full Name: ")
+    EmailId = "abcd@gmail.com"#input("Please enter your email Address: ")
+    Age = 23#int(input("Please enter your Age: "))
+    AadharNumber = 12563#int(input("Please enter your Aadhar Number: "))  
+    HomeAddress = "Home"#str(input("Please enter your Complete Home Adddress: "))
+    WorkAddress = "Office"#str(input("Please enter your Complete Work Adddress: "))
+    Details = ["Name","EmailId","Age","AadharNumber","HomeAddress","WorkAddress"]
+    DetailsVariable = [Name,EmailId,Age,AadharNumber,HomeAddress,WorkAddress]
+    ProductListStr = ["OrderId","ProductList","Purchased","PaymentMethod"]
+    print("your entered details: ",DetailsVariable)
+    Name = wb.create_sheet(Name,0)
+    cell = 69
+    for j in range(0,4):
+        Name[chr(cell)+str(1)] = ProductListStr[j]
+        cell = cell + 1
+    for i in range(1,7):
+        Name[chr(65)+str(i)] = Details[i-1]
+        Name[chr(66)+str(i)] = DetailsVariable[i-1]
+        #cell = cell + 1
+    for k in range(2,12):
+        Name[chr(69)+str(k)] = k-1
+        
+    wb.save("UserData.xlsx")
+    print("Your Account has been created succesfully! ",Name)
+    print("we are done, explore our catalogue here...")
+else:
+    EmailId = "DummyNam2@gmail.com"#input(("Please enter your registered email address, we will log you in :): "))
+    Name = "Hawaijahaj"#input(("Please enter your first name just for confirmation..."))
+    print("Logging you in...")
+    print("...")
+    print("Hi ",Name," we are done, explore our catalogue here...")
+productcatalogue()
+print("Hope u have gone through the catalogue, please fill your choices here: ")
+enterpname(Name)
+print("Adding your selected products into your Cart!.....")
+print(".....")
+confirmationandpayment(Name)
